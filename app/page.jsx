@@ -688,7 +688,7 @@ function BlockStack({
   );
 }
 
-function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBlockRemove, onFeedback, showComparison, setShowComparison, activeMode }) {
+function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBlockRemove, onFeedback, showComparison, setShowComparison }) {
   const [drawingLine, setDrawingLine] = useState(false);
   const [lineStart, setLineStart] = useState(null);
   const [currentLine, setCurrentLine] = useState(null);
@@ -824,13 +824,6 @@ function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBloc
   
 
   
-  const hasExistingLine = (position, isStart = true) => {
-    return completedLines.some(line => {
-      const checkPoint = isStart ? line.start : line.end;
-      return Math.abs(checkPoint[0] - position[0]) < 0.5 &&
-             Math.abs(checkPoint[1] - position[1]) < 0.5;
-    });
-  };
 
   const isWithinDropZone = (point) => {
     const centerZone = {
@@ -869,7 +862,7 @@ function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBloc
   };
 
 
-  const handlePointerDown = (event) => {
+  const handlePointerDown = () => {
     if (interactionMode !== 'draw') return;
   
     raycaster.setFromCamera(pointer, camera);
@@ -929,7 +922,7 @@ function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBloc
     }
   };
 
-  const handlePointerMove = (event) => {
+  const handlePointerMove = () => {
     if (interactionMode !== 'draw') return;
   
     raycaster.setFromCamera(pointer, camera);
@@ -1252,7 +1245,6 @@ export default function Home() {
           }}
           showComparison={showComparison}
           setShowComparison={setShowComparison}
-          activeMode={activeMode}
         />
       </Canvas>
         </div>

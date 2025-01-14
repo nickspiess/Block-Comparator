@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
@@ -19,16 +18,12 @@ const customFont = localFont({
   variable: '--font-custom'
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Block Comparator",
   description: "Let's Learn with some Blocks!",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
