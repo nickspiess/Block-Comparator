@@ -13,7 +13,7 @@ function BlockCountDisplay({ count, position }) {
     fontSize: 1.8,
     anchorX: "center",
     anchorY: "middle",
-    font: '/fonts/frostbite.ttf', // Make sure this font is available
+    font: '/fonts/frostbite.ttf',
     outlineWidth: 0,
     outlineColor: "#57beff4d",
     outlineOpacity: 0.5,
@@ -233,8 +233,6 @@ function ComparisonLine({ start, end, inProgress = false }) {
     new THREE.Vector3(start[0], start[1], 0.5),
     new THREE.Vector3(end[0], end[1], 0.5)
   ];
-
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
   
   // Increased base opacity and more consistent material
   const mainMaterial = useMemo(() => new THREE.LineBasicMaterial({ 
@@ -452,8 +450,8 @@ function StackClickZone({ position, type, blockCount, isActive }) {
     const bottomBlockPosition = baseY - ((adjustedCount - 1) * spacing / 2);
     
     // Make offsets consistent with getClickZone
-    const topOffset = 1;    // Reduced from 2
-    const bottomOffset = 1; // Made equal to top
+    const topOffset = 1;
+    const bottomOffset = 1;
     
     yOffset = type === 'top' 
       ? topBlockPosition + topOffset
@@ -533,13 +531,12 @@ function BlockStack({
 }) {
   const [positions, setPositions] = useState(['center']);
   const [isFirstRender, setIsFirstRender] = useState(true);
-  const [lastAction, setLastAction] = useState(null);  // Add this back
-  const [lastAddedPosition, setLastAddedPosition] = useState('top');
+  const [lastAction, setLastAction] = useState(null); 
   const [blocks, setBlocks] = useState([]);
 
   const handleBlockDrop = (dropPosition) => {
     if (onOutOfBounds(stackId, dropPosition)) {
-      setLastAction('drag');  // Add this to handle removal animation
+      setLastAction('drag');
       return;
     }
     
@@ -605,7 +602,7 @@ function BlockStack({
       isDragged: false
     }));
     setBlocks(calculateBlockPositions(initialBlocks));
-  }, []); // Empty dependency array for initialization
+  }, []);
 
   // Reset positions when stack becomes empty
   useEffect(() => {
@@ -776,8 +773,8 @@ function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBloc
       const bottomBlockY = baseY - Math.min((count - 1), maxBlocks - 1) * (spacing / 2);
       
       // Adjust offsets to be more balanced
-      const topOffset = 1;    // Reduced from 2
-      const bottomOffset = 1; // Made equal to top
+      const topOffset = 1;
+      const bottomOffset = 1;
       
       return {
         top: topBlockY + topOffset,
@@ -968,7 +965,6 @@ function Scene({ leftCount, rightCount, onBlockTransfer, interactionMode, onBloc
 
   
 
-  // Inside Scene component's return statement
 return (
   <>
     <ambientLight intensity={0.5} />
